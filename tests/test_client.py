@@ -72,7 +72,6 @@ class TestRecaptchaClient(TestCase):
         self.assertEqual(params, expected_params)
 
     def test_parse_response_bad_response_param(self):
-
         """
         Can parse response correctly
         """

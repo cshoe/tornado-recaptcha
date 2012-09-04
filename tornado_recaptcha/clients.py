@@ -8,7 +8,7 @@ logger = logging.getLogger(__name__)
 ENDPOINT = 'http://www.google.com/recaptcha/api/verify'
 
 
-class ReCaptchaClient(object):
+class RecaptchaClient(object):
 
     """
     Handle checking captcha challenges and responses. 
