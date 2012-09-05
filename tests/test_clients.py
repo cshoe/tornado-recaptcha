@@ -5,7 +5,7 @@ from unittest import TestCase
 
 from tornado import httpclient, httpserver
 
-import tornado_recaptcha
+from tornado_recaptcha.clients import RecaptchaClient
 
 
 class TestRecaptchaClient(TestCase):
@@ -20,14 +20,13 @@ class TestRecaptchaClient(TestCase):
         Can extract params correctly
         """
         client = RecaptchaClient()
-        # test calling without an httpserver.HTTPRequest
         success, params = client._extract_params_from_request('request')
         self.assertFalse(success)
         self.assertEqual(params, {})
 
     def test_extract_params_from_request_no_recaptcha_data(self):
         """
-        test calling with a request that does not have a recaptch key in
+        test calling with a request that does not have a recaptcha key in
         """
         client = RecaptchaClient()
         request_data = {'some_key': 1}

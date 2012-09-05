@@ -58,20 +58,12 @@ class RecaptchaClient(object):
             logger.warn('Called without a proper HTTPRequest')
             return (False, {})
 
-        request_data = json.loads(request.body)
-
-        if 'recaptcha' not in request_data.keys():
-            logger.warn('No recaptcha data found in request')
-            return (False, {})
-
-        desired_keys = ['challenge', 'response']
-        recaptcha_data = request_data['recaptcha']
         params = {}
-        for key in desired_keys:
+        for key in ['challenge', 'response']:
             try:
-                params[key] = recaptcha_data[key]
+                params[key] = request.arguments[key]
             except KeyError:
-                logger.warn('%s not found in reCaptcha data', key)
+                logger.warn('%s not found in request data', key)
                 return (False, {})
 
         # add remote ip to params
